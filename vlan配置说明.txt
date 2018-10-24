@@ -1,0 +1,38 @@
+1.构建拓扑图
+注意设备名、连接端口号
+2.配置pc
+注意ip地址分配
+测试pc间是否连通
+3.配置交换机、vlan
+单一交换机配置：
+1）创建vlan:
+	enable
+        conf t
+        vlan 10
+        exit
+        vlan 20
+2）将f0/1到f0/4划分到vlan
+     int range f0/1-2
+     swi mode access 
+     swi access  vlan 10
+     int range f0/3-4
+     swi mode access 
+     swi access  vlan 20
+3)测试
+1）同一vlan内 pc1与pc2 pc3与pc4
+2）不同vlan间 pc1与pc3、pc4
+跨交换机配置
+1）创建vlan:  vlan 10 或 20
+2）配置access端口:
+              int f0/1
+              swi mode access
+              swi access vlan 10
+              ...
+3）配置trunk端口
+              int f0/24
+              swi mode trunk
+4.测试
+1）同一vlan内 pc1与pc2 pc3与pc4
+2）不同vlan间 pc1与pc3、pc4
+
+注意记录实验配置过程及测试结果
